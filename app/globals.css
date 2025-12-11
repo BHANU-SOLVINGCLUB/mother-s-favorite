@@ -1,0 +1,126 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #fdf8f3;
+  --foreground: #5c4a3a;
+  --card: #ffffff;
+  --card-foreground: #5c4a3a;
+  --popover: #ffffff;
+  --popover-foreground: #5c4a3a;
+  --primary: #e8a87c;
+  --primary-foreground: #ffffff;
+  --secondary: #f5ede4;
+  --secondary-foreground: #5c4a3a;
+  --muted: #f5ede4;
+  --muted-foreground: #7a6652;
+  --accent: #ffecd9;
+  --accent-foreground: #5c4a3a;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e5ddd4;
+  --input: #e5ddd4;
+  --ring: #e8a87c;
+  --chart-1: #e8a87c;
+  --chart-2: #a89076;
+  --chart-3: #8b7355;
+  --chart-4: #ffecd9;
+  --chart-5: #f5ede4;
+  --radius: 0.75rem;
+  --sidebar: #fdf8f3;
+  --sidebar-foreground: #5c4a3a;
+  --sidebar-primary: #e8a87c;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ffecd9;
+  --sidebar-accent-foreground: #5c4a3a;
+  --sidebar-border: #e5ddd4;
+  --sidebar-ring: #e8a87c;
+}
+
+@theme inline {
+  --font-sans: "Nunito Sans", "Nunito Sans Fallback", system-ui, sans-serif;
+  --font-serif: "Playfair Display", "Playfair Display Fallback", Georgia, serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
