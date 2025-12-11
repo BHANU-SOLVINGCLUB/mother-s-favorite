@@ -6,6 +6,8 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { CartProvider } from "@/lib/cart-context"
+import { WishlistProvider } from "@/lib/wishlist-context"
+import { Toaster } from "@/components/ui/sonner"
 import "./globals.css"
 
 const nunitoSans = Nunito_Sans({
@@ -39,10 +41,29 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${nunitoSans.variable} ${playfairDisplay.variable} font-sans antialiased`}>
         <CartProvider>
-          <Header />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-          <WhatsAppButton />
+          <WishlistProvider>
+            <Header />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+            <WhatsAppButton />
+            <Toaster 
+              position="top-center" 
+              toastOptions={{
+                style: {
+                  background: '#FDF8F3',
+                  border: '1px solid #E5DDD4',
+                  color: '#8B7355',
+                  borderRadius: '1rem',
+                  fontFamily: 'var(--font-nunito)',
+                },
+                classNames: {
+                  success: 'bg-[#C9D4C5] border-[#A8B9A3] text-[#4A5D47]',
+                  error: 'bg-red-50 border-red-200 text-red-700',
+                  actionButton: 'bg-[#E8A87C] text-white hover:bg-[#D4956B]',
+                },
+              }}
+            />
+          </WishlistProvider>
         </CartProvider>
         <Analytics />
       </body>

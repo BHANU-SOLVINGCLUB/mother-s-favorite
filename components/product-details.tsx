@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { Star, ShoppingBag, Minus, Plus, Check, Truck, Shield, RotateCcw, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -9,6 +10,9 @@ import type { Product, ProductVariant } from "@/lib/types"
 import { createClient } from "@/lib/supabase/client"
 import { getSessionId } from "@/lib/cart"
 import { useCart } from "@/lib/cart-context"
+import { useWishlist } from "@/lib/wishlist-context"
+import { toast } from "sonner"
+import type { User } from "@supabase/supabase-js"
 
 interface ProductDetailsProps {
   product: Product
@@ -23,12 +27,64 @@ export function ProductDetails({ product, variants }: ProductDetailsProps) {
   const [quantity, setQuantity] = useState(1)
   const [isAdding, setIsAdding] = useState(false)
   const [addedToCart, setAddedToCart] = useState(false)
+  const [user, setUser] = useState<User | null>(null)
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true)
   const { refreshCart } = useCart()
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist()
+  const router = useRouter()
+  
+  const inWishlist = isInWishlist(product.id)
 
   const currentPrice = selectedVariant?.price || product.price
   const comparePrice = selectedVariant?.compare_at_price || product.compare_at_price
 
   const images = ["/product_image1.jpeg", "/product_image2.jpeg", "/product_image3.jpeg"]
+
+  // Check authentication status
+  useEffect(() => {
+    const checkAuth = async () => {
+      const supabase = createClient()
+      const { data: { user } } = await supabase.auth.getUser()
+      setUser(user)
+      setIsCheckingAuth(false)
+    }
+    checkAuth()
+
+    // Listen for auth changes
+    const supabase = createClient()
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
+
+  const handleWishlistClick = () => {
+    if (!user) {
+      toast.error("Please login to add items to your wishlist", {
+        action: {
+          label: "Login",
+          onClick: () => router.push("/auth/login"),
+        },
+      })
+      return
+    }
+    
+    if (inWishlist) {
+      removeFromWishlist(product.id)
+      toast.success("Removed from wishlist")
+    } else {
+      addToWishlist({
+        id: product.id,
+        name: product.name,
+        slug: product.slug,
+        price: currentPrice,
+        comparePrice: comparePrice ?? undefined,
+        image: images[0],
+      })
+      toast.success("Added to wishlist")
+    }
+  }
 
   const handleAddToCart = async () => {
     setIsAdding(true)
@@ -229,9 +285,13 @@ export function ProductDetails({ product, variants }: ProductDetailsProps) {
               <Button
                 size="lg"
                 variant="outline"
-                className="rounded-full border-[#E5DDD4] text-[#8B7355] hover:bg-[#FFECD9] bg-transparent"
+                className={`rounded-full border-[#E5DDD4] hover:bg-[#FFECD9] bg-transparent ${
+                  inWishlist ? "text-red-500 border-red-300" : "text-[#8B7355]"
+                }`}
+                onClick={handleWishlistClick}
+                disabled={isCheckingAuth}
               >
-                <Heart className="h-5 w-5" />
+                <Heart className={`h-5 w-5 ${inWishlist ? "fill-current" : ""}`} />
               </Button>
             </div>
 
