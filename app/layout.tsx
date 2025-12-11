@@ -7,7 +7,7 @@ import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { CartProvider } from "@/lib/cart-context"
 import "./globals.css"
-
+//sample
 const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
   variable: "--font-nunito",
