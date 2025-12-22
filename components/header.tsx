@@ -79,26 +79,26 @@ export function Header() {
       )}
     >
       <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between lg:h-20">
+        <div className="flex h-24 items-center justify-between lg:h-28">
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
               src="/logo-uggu.png"
               alt="Mother's Favorite - Uggu"
-              width={180}
-              height={60}
-              className="h-14 lg:h-16 w-auto object-contain"
+              width={280}
+              height={100}
+              className="h-[70px] lg:h-[90px] w-auto object-contain"
               priority
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-10">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-[#8B7355] hover:text-[#E8A87C] transition-colors"
+                className="text-base font-medium text-[#8B7355] hover:text-[#E8A87C] transition-colors"
               >
                 {link.label}
               </Link>
@@ -106,13 +106,13 @@ export function Header() {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <Button
               variant="ghost"
               size="icon"
-              className="hidden lg:flex text-[#8B7355] hover:text-[#E8A87C] hover:bg-[#FFECD9]"
+              className="hidden lg:flex h-11 w-11 text-[#8B7355] hover:text-[#E8A87C] hover:bg-[#FFECD9]"
             >
-              <Search className="h-5 w-5" />
+              <Search className="h-6 w-6" />
               <span className="sr-only">Search</span>
             </Button>
 
@@ -122,10 +122,10 @@ export function Header() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="hidden lg:flex text-[#8B7355] hover:text-[#E8A87C] hover:bg-[#FFECD9]"
+                    className="hidden lg:flex h-11 w-11 text-[#8B7355] hover:text-[#E8A87C] hover:bg-[#FFECD9]"
                   >
-                    <div className="h-8 w-8 rounded-full bg-[#E8A87C] flex items-center justify-center">
-                      <span className="text-white text-sm font-medium">
+                    <div className="h-9 w-9 rounded-full bg-[#E8A87C] flex items-center justify-center">
+                      <span className="text-white text-base font-medium">
                         {user.email?.charAt(0).toUpperCase()}
                       </span>
                     </div>
@@ -157,11 +157,11 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="hidden lg:flex text-[#8B7355] hover:text-[#E8A87C] hover:bg-[#FFECD9]"
+                className="hidden lg:flex h-11 w-11 text-[#8B7355] hover:text-[#E8A87C] hover:bg-[#FFECD9]"
                 asChild
               >
                 <Link href="/auth/login">
-                  <User className="h-5 w-5" />
+                  <User className="h-6 w-6" />
                   <span className="sr-only">Account</span>
                 </Link>
               </Button>
@@ -170,13 +170,13 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="relative text-[#8B7355] hover:text-[#E8A87C] hover:bg-[#FFECD9]"
+              className="relative h-11 w-11 text-[#8B7355] hover:text-[#E8A87C] hover:bg-[#FFECD9]"
               asChild
             >
               <Link href="/wishlist">
-                <Heart className="h-5 w-5" />
+                <Heart className="h-6 w-6" />
                 {wishlistCount > 0 && (
-                  <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#E8A87C] text-xs font-bold text-white">
+                  <span className="absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#E8A87C] text-xs font-bold text-white">
                     {wishlistCount > 99 ? "99+" : wishlistCount}
                   </span>
                 )}
@@ -187,13 +187,13 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="relative text-[#8B7355] hover:text-[#E8A87C] hover:bg-[#FFECD9]"
+              className="relative h-11 w-11 text-[#8B7355] hover:text-[#E8A87C] hover:bg-[#FFECD9]"
               asChild
             >
               <Link href="/cart">
-                <ShoppingBag className="h-5 w-5" />
+                <ShoppingBag className="h-6 w-6" />
                 {cartCount > 0 && (
-                  <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#E8A87C] text-xs font-bold text-white">
+                  <span className="absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#E8A87C] text-xs font-bold text-white">
                     {cartCount > 99 ? "99+" : cartCount}
                   </span>
                 )}
@@ -204,8 +204,8 @@ export function Header() {
             {/* Mobile Menu */}
             <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
               <SheetTrigger asChild className="lg:hidden">
-                <Button variant="ghost" size="icon" className="text-[#8B7355] hover:text-[#E8A87C] hover:bg-[#FFECD9]">
-                  <Menu className="h-6 w-6" />
+                <Button variant="ghost" size="icon" className="h-11 w-11 text-[#8B7355] hover:text-[#E8A87C] hover:bg-[#FFECD9]">
+                  <Menu className="h-7 w-7" />
                   <span className="sr-only">Menu</span>
                 </Button>
               </SheetTrigger>

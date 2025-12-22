@@ -3,8 +3,8 @@
 import { MessageCircle } from "lucide-react"
 
 export function WhatsAppButton() {
-  const phoneNumber = "919876543210"
-  const message = "Hi! I have a question about Mother Uggu baby food."
+  const phoneNumber = "919515294993" // +91 9515294993
+  const message = "Hello! I'm interested in learning more about Mother Uggu - Traditional Telugu Baby Cereal. Could you please provide more information?"
 
   return (
     <a
